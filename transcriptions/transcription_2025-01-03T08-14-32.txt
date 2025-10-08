@@ -1,0 +1,5 @@
+Original Text:
+really
+
+Punctuated Text:
+really.

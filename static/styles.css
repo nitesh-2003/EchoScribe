@@ -1,0 +1,134 @@
+/* General Reset */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', Arial, sans-serif;
+    background-color: #121212; /* Dark background */
+    color: #E0E0E0; /* Light text color */
+    line-height: 1.6;
+}
+
+/* Container */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #1E1E1E; /* Slightly lighter background for the container */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Headings */
+h1, h3 {
+    color: #FFFFFF; /* White color for headings */
+}
+
+/* Button Styles */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    background-color: #6200EE; /* Primary button color */
+    color: #FFFFFF; /* Button text color */
+}
+
+.btn:hover {
+    background-color: #3700B3; /* Darker shade on hover */
+}
+
+/* Add margin to the Stop Recording button */
+#stopRecording {
+    margin-left: 10px; /* Adjust the value as needed for spacing */
+}
+
+/* Button Container */
+.button-container {
+    display: flex;
+    justify-content: space-between; /* Space between left and right buttons */
+    align-items: center; /* Center align items vertically */
+    margin-bottom: 20px; /* Add some space below the buttons */
+}
+
+/* Left Buttons */
+.left-buttons {
+    display: flex; /* Align left buttons in a row */
+}
+
+/* Right Buttons */
+.right-buttons {
+    display: flex; /* Align right buttons in a row */
+}
+
+/* Form Elements */
+.form-label {
+    color: #E0E0E0; /* Light color for labels */
+}
+
+.form-select {
+    background-color: #333333; /* Dark background for select */
+    color: #E0E0E0; /* Light text color */
+    border: 1px solid #444444; /* Border color */
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%; /* Make the select input take the full width */
+    max-width: 400px; /* Limit the width of select for better design */
+}
+
+/* Result Section */
+.result {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #2A2A2A; /* Darker background for results */
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add some subtle shadow for depth */
+}
+
+/* Result Text */
+#originalText, #translatedText, #punctuatedText {
+    color: #E0E0E0; /* Light text color for results */
+    font-size: 1.1rem; /* Slightly increase font size for better readability */
+}
+
+/* Footer Icons Section */
+.footer-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 50px;
+}
+
+.footer-icons img {
+    width: 40px;
+    height: 40px;
+    filter: brightness(0) invert(1); /* Invert colors for dark mode */
+    transition: filter 0.3s;
+}
+
+.footer-icons img:hover {
+    filter: none; /* Normal color on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    .button-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .left-buttons,
+    .right-buttons {
+        width: 100%;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+    .form-select {
+        width: 100%;
+    }
+}

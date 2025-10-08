@@ -1,0 +1,4 @@
+Download required models from :
+https://alphacephei.com/vosk/models
+
+download specific language models you need.

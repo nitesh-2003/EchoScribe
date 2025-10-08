@@ -1,0 +1,13 @@
+pyaudio
+English Model: Download English Model (vosk-model-small-en-us-0.15)
+Hindi Model: Download Hindi Model (vosk-model-small-hi-in-0.15)
+Telugu Model: Download Telugu Model (vosk-model-small-te-in-0.15)
+deepmultilingualpunctuation import PunctuationModel
+from vosk import Model, KaldiRecognizer
+
+
+vosk uses deep neural networks for automatic speech recognition(ASR). It uses KaldiRecognizer(asr toolkit).
+kaldi uses DNN-HMM(hidden markov models). it uses weighted finite transducers for decoding.
+
+deepmultilingualpunctuation import PunctuationModel uses multilingual transformer model, sequence labeling, model is fine-tuned on datasets.
+common datasets like ted talks, opensubtitles

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EchoScribe</title>
+    <!-- Link to the custom CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* Additional styles for spacing */
+        .mb-4 {
+            margin-bottom: 1.5rem; /* Adjust this value for more or less space */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>EchoScribe: Audio Transcription Tool</h1>
+
+        <div class="row mb-4">
+            <div class="col-md-6 mx-auto">
+                <label for="language" class="form-label">Select Language:</label>
+                <select id="language" class="form-select">
+                    <option value="english">English</option>
+                    <option value="hindi">Hindi</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <div class="left-buttons">
+                <button id="startRecording" class="btn">Start Recording</button>
+                <button id="stopRecording" class="btn">Stop Recording</button>
+            </div>
+            <div class="right-buttons">
+                <button id="saveTranscription" class="btn">Save Transcription</button>
+            </div>
+        </div>
+
+        <div class="result">
+            <h3>Original Text:</h3>
+            <p id="originalText">N/A</p>
+
+            <h3>Translated Text:</h3>
+            <p id="translatedText">N/A</p>
+
+            <h3>Punctuated Text:</h3>
+            <p id="punctuatedText">N/A</p>
+        </div>
+    </div>
+
+    <script>
+        const startButton = document.getElementById('startRecording');
+        const stopButton = document.getElementById('stopRecording');
+        const saveButton = document.getElementById('saveTranscription');
+        const languageSelect = document.getElementById('language');
+
+        startButton.addEventListener('click', () => {
+            fetch('/start_recording')
+                .then(response => response.json())
+                .then(data => alert(data.message))
+                .catch(error => alert('Error starting recording: ' + error));
+        });
+
+        stopButton.addEventListener('click', () => {
+            const language = languageSelect.value;
+            fetch(`/stop_recording?language=${language}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.original_text) {
+                        document.getElementById('originalText').textContent = data.original_text;
+                    }
+                    if (data.translated_text) {
+                        document.getElementById('translatedText').textContent = data.translated_text; // Display translated text without punctuation
+                    }
+                    if (data.punctuated_text) {
+                        document.getElementById('punctuatedText').textContent = data.punctuated_text;
+                    }
+                })
+                .catch(error => alert('Error stopping recording: ' + error));
+        });
+
+
+        saveButton.addEventListener('click', () => {
+            const originalText = document.getElementById('originalText').textContent;
+            const punctuatedText = document.getElementById('punctuatedText').textContent;
+
+            // Create a timestamp
+            const timestamp = new Date().toISOString().replace(/:/g, '-').split('.')[0];
+            const filename = `transcription_${timestamp}.txt`;
+
+            // Create a Blob from the transcription text
+            const blob = new Blob([`Original Text:\n${originalText}\n\nPunctuated Text:\n${punctuatedText}`], { type: 'text/plain' });
+
+            // Create a link element
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+
+            // Append to the body
+            document.body.appendChild(link);
+
+            // Programmatically click the link to trigger the download
+            link.click();
+
+            // Clean up and remove the link
+            document.body.removeChild(link);
+        });
+    </script>
+</body>
+</html>
